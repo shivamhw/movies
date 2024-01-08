@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getAvailableRegions, getProviders } from "@/lib/api";
+import { getAvailableRegions, getFoogleLinks, getProviders } from "@/lib/api";
 import { PiQuestion } from "react-icons/pi";
 import RegionSelect from "../provider/select";
 import ProviderGrid from "../provider/grid";
@@ -15,11 +15,12 @@ export default async function Providers({
 }) {
   const regions = await getAvailableRegions();
   const data = await getProviders(type, media.id);
+  const foogleRes = await getFoogleLinks(type, media);
   const selectedRegion = data.results[region as string];
 
   return (
     <div className="flex items-start px-global pb-6">
-      <div className="aspect-[2/3] max-w-[350px] flex-shrink-0 mr-12 hidden lg:block">
+      {/* <div className="aspect-[2/3] max-w-[350px] flex-shrink-0 mr-12 hidden lg:block">
         {media.poster_path ? (
           <Image
             className="w-full h-full object-cover p-1 bg-zinc-800"
@@ -34,9 +35,9 @@ export default async function Providers({
             <PiQuestion className="text-4xl text-zinc-500" />
           </div>
         )}
-      </div>
-      <div>
-        <h2 className="text-2xl mb-4 flex items-center gap-4">
+      </div> */}
+      {/* <div> */}
+        {/* <h2 className="text-2xl mb-4 flex items-center gap-4">
           <Image
             src="https://www.themoviedb.org/assets/2/v4/logos/justwatch-c2e58adf5809b6871db650fb74b43db2b8f3637fe3709262572553fa056d8d0a.svg"
             alt="JustWatch"
@@ -46,8 +47,8 @@ export default async function Providers({
           />
 
           <RegionSelect regions={regions.results} />
-        </h2>
-        <p className="mb-8 max-w-3xl">
+        </h2> */}
+        {/* <p className="mb-8 max-w-3xl">
           JustWatch makes it easy to find out where you can legally watch your
           favorite movies & TV shows online. Visit{" "}
           <a
@@ -59,25 +60,25 @@ export default async function Providers({
             JustWatch
           </a>{" "}
           for more information.
-        </p>
-        <div className="max-w-5xl space-y-4">
+        </p> */}
+        {/* <div className="max-w-5xl space-y-4"> */}
           <ProviderGrid
             title="Stream"
             list={selectedRegion?.flatrate}
-            link={selectedRegion?.link}
+            link={foogleRes.data || []}
           />
-          <ProviderGrid
+          {/* <ProviderGrid
             title="Buy"
             list={selectedRegion?.buy}
             link={selectedRegion?.link}
-          />
-          <ProviderGrid
+          /> */}
+          {/* <ProviderGrid
             title="Rent"
             list={selectedRegion?.rent}
             link={selectedRegion?.link}
-          />
-        </div>
-      </div>
+          /> */}
+        {/* </div> */}
+      {/* </div> */}
     </div>
   );
 }

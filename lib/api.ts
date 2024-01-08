@@ -1,6 +1,7 @@
 import "server-only";
 import axios from "axios";
 import { cache } from "react";
+import { Foogle, MovieSearchResponse } from "./foogle";
 
 export const apiUrl = "https://api.themoviedb.org/3";
 
@@ -114,3 +115,13 @@ export const getProviders = cache(
   (type: MediaType, id: string): Promise<ProviderResult> =>
     fetchApi(`/${type}/${id}/watch/providers`)
 );
+
+const foogle = Foogle.getInstance()
+export const getFoogleLinks = 
+  (type: MediaType, media: Media): Promise<MovieSearchResponse> =>{
+    return foogle.getMovies({
+      movie_name: media.name || media.title,
+      movie_rel_year: media.release_date?.split('-')[0] || ""
+    })
+  }
+    
