@@ -16,7 +16,7 @@ export default function ProviderGrid({
   }
 
   return (
-    <div  className="w-full break-all h-28 overflow-auto">
+    <div  className="w-full break-all h-96 overflow-auto">
       <p className="py-2 mb-2 font-medium border-b border-zinc-800">{title}</p>
       <div className="flex flex-col flex-wrap gap-4 py-2 w-full">
         {
