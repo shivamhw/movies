@@ -11,7 +11,7 @@ export default function ProviderCard({
   file: FoogleMovieResponse;
 }) {
   return (
-    <div className="w-full">
+    <div className="w-full flex">
     <Link
       href={file.cf_worker_link || "/"}
       className="flex items-center border border-zinc-800/60 transition select-none hover:bg-zinc-800/60"
@@ -30,6 +30,14 @@ export default function ProviderCard({
         {" "}<span className="text-pink-500">{formatBytes(Number(file.size))}</span>
       </span>
 
+    </Link>
+    <Link
+      href={"vlc://"+file.player_link || "/"}
+      className="flex items-center border border-zinc-800/60 transition select-none hover:bg-zinc-800/60"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
+      <span>Stream link</span>
     </Link>
     </div>
   );

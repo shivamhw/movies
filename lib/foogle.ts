@@ -1,11 +1,18 @@
 import { drive_v3 } from "googleapis";
 import axios from "axios";
 
-axios.defaults.baseURL = process.env.FOOGLE_API_URL
-axios.defaults.headers.authorization = "Bearer "+ process.env.FOOGLE_API_KEY
+const api = axios.create({
+    baseURL: process.env.FOOGLE_API_URL,
+    headers: {
+        authorization: "Bearer "+ process.env.FOOGLE_API_KEY,
+    },
+  });
+  
 export class Foogle{
     private static instance: Foogle | null = null
-    private constructor(){}
+    private constructor(){
+
+    }
     public static getInstance() : Foogle {
         if(this.instance){
             return this.instance;
@@ -13,11 +20,11 @@ export class Foogle{
         return new Foogle()
     }
     public async getMovies(params : MovieSearchQueryParams) {
-        const { data } = await axios.get<MovieSearchResponse>("/movies?" + new URLSearchParams(params).toString())
+        const { data } = await api.get<MovieSearchResponse>("/movies?" + new URLSearchParams(params).toString())
         return data;
     }
     public async getSeries(params : SeriesSearchQueryParams){
-        const { data } = await axios.get<MovieSearchResponse>("/series", {
+        const { data } = await api.get<MovieSearchResponse>("/series", {
             params:{
                 name: params.name,
                 season: params.season,
