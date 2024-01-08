@@ -14,9 +14,9 @@ export default async function Providers({
   region: string | null;
 }) {
   const regions = await getAvailableRegions();
-  const data = await getProviders(type, media.id);
+  // const data = await getProviders(type, media.id);
   const foogleRes = await getFoogleLinks(type, media);
-  const selectedRegion = data.results[region as string];
+  // const selectedRegion = data.results[region as string];
 
   return (
     <div className="flex items-start px-global pb-6">
@@ -64,7 +64,7 @@ export default async function Providers({
         {/* <div className="max-w-5xl space-y-4"> */}
           <ProviderGrid
             title="Stream"
-            list={selectedRegion?.flatrate}
+            // list={selectedRegion?.flatrate}
             link={foogleRes.data || []}
           />
           {/* <ProviderGrid

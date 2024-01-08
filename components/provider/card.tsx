@@ -1,19 +1,19 @@
+import { FoogleMovieResponse } from "@/lib/foogle";
+import { formatBytes } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProviderCard({
   provider,
-  link,
-  name
+  file,
 }: {
   provider: Provider;
-  link: string;
-  name: string
+  file: FoogleMovieResponse;
 }) {
   return (
     <div className="w-full">
     <Link
-      href={link}
+      href={file.cf_worker_link || "/"}
       className="flex items-center border border-zinc-800/60 transition select-none hover:bg-zinc-800/60"
       target="_blank"
       rel="noreferrer noopener"
@@ -26,8 +26,10 @@ export default function ProviderCard({
         unoptimized
       />
       <span className="text-sm px-2">
-        {name}
+        {file.name || ""}
+        {" "}<span className="text-pink-500">{formatBytes(Number(file.size))}</span>
       </span>
+
     </Link>
     </div>
   );

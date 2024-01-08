@@ -3,11 +3,9 @@ import ProviderCard from "./card";
 
 export default function ProviderGrid({
   title,
-  list,
   link,
 }: {
   title: React.ReactNode;
-  list?: Provider[];
   link: FoogleMovieResponse[];
 }) {
   const foogleProvider = {
@@ -18,17 +16,14 @@ export default function ProviderGrid({
   }
 
   return (
-    <div  className="w-full break-all">
+    <div  className="w-full break-all h-28 overflow-auto">
       <p className="py-2 mb-2 font-medium border-b border-zinc-800">{title}</p>
       <div className="flex flex-col flex-wrap gap-4 py-2 w-full">
         {
           link?.map((file) => {
-            return <ProviderCard key={foogleProvider.provider_name} provider={foogleProvider} link={file.cf_worker_link || ""} name={file.name || ""} />
+            return <ProviderCard key={foogleProvider.provider_name} provider={foogleProvider} file={file} />
           })
         }
-        {/* {list?.map((provider) => (
-          <ProviderCard key={foogleProvider.provider_name} provider={foogleProvider} link={link} />
-        )) ?? <p className="text-white/60">No provider</p>} */}
       </div>
     </div>
   );
